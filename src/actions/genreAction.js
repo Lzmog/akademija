@@ -1,4 +1,4 @@
 export const setGenre = (genre) => ({
-    type: 'genre',
+    type: "genre",
     genre,
 });

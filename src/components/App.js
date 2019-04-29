@@ -3,7 +3,9 @@ import Card from './Card';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { endpoints, getImageUrl } from '../../config';
-import { setMovieList } from '../actions';
+import { setGenre } from '../actions/genreAction';
+import { setMovie } from '../actions/movieAction';
+import { setLike, setUnlike } from '../actions/likeAction';
 import { getMovieList } from '../thunks';
 
 class App extends React.Component {
