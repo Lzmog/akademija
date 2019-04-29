@@ -2,7 +2,7 @@ const initialState = {
     list: [],
 };
 
-const movieReducer = (state = initialState, action) => {
+const logReducer = (state = initialState, action) => {
     switch (action.type) {
         case 'SET_MOVIE_LIST':
             return {
@@ -15,5 +15,5 @@ const movieReducer = (state = initialState, action) => {
 };
 
 export default (state, action) => {
-    movie: movieReducer
+    log: logReducer
 };

@@ -1,10 +1,19 @@
-export default (state, action) => {
+const initialState = {
+    list: [],
+};
+
+const genreReducer = (state = initialState, action) => {
     switch (action.type) {
-        case "rotate":
+        case 'SET_MOVIE_LIST':
             return {
-                rotating: action.payload
+                ...state,
+                list: action.list,
             };
-        default:
-            return state;
+
+        default: return state;
     }
+};
+
+export default (state, action) => {
+    genre: genreReducer
 };
