@@ -1,3 +1,4 @@
-export const setLog = {
-    type: "log"
-};
+export const setLogAction = (log) => ({
+    type: "set_log",
+    log
+});

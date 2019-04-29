@@ -19,7 +19,9 @@ class Card extends React.Component {
             votes,
             description,
             setFavoriteMovie,
-            favorite
+            favorite,
+            like,
+            heart
         } = this.props;
         const {opened} = this.state;
 

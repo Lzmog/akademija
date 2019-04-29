@@ -1,5 +1,5 @@
 export const setMovies = (movies) => ({
-    type: "movies",
+    type: "set_movies",
     movies,
 });
 
