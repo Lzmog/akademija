@@ -1,19 +1,19 @@
 const initialState = {
-    list: [],
+    log: [],
 };
 
 const logReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_MOVIE_LIST':
+        case "set_log":
             return {
                 ...state,
-                list: action.list,
+                log: [...state.log, action.log]
             };
 
         default: return state;
     }
 };
 
-export default (state, action) => {
-    log: logReducer
+export default (state = initialState, action) => {
+    log: logReducer(state, action)
 };

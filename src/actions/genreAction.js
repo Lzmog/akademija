@@ -1,7 +1,7 @@
 import {setLog} from "../thunks/getLog";
 
 export const setGenreList = (genre) => ({
-    type: "genre",
+    type: "set_genre",
     genre,
 });
 
@@ -10,7 +10,7 @@ export const setGenre = (id, title) => ({
         dispatch(setLog(`Genre: ${title}`));
 
         dispatch({
-            type: "set_genre",
+            type: "set_active_genre",
             id
         })
     }

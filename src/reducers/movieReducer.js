@@ -4,7 +4,7 @@ const initialState = {
 
 const movieReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_MOVIE_LIST':
+        case "set_movies":
             return {
                 ...state,
                 list: action.list,
@@ -14,6 +14,6 @@ const movieReducer = (state = initialState, action) => {
     }
 };
 
-export default (state, action) => {
-    movie: movieReducer
+export default (state = initialState, action) => {
+    movie: movieReducer(state, action)
 };
