@@ -9,75 +9,11 @@ import { setLike, setUnlike } from '../actions/likeAction';
 import { getMovieList } from '../thunks';
 
 class App extends React.Component {
-    constructor() {
-        super();
-
-        this.state = {
-            genreList: [],
-            movieList: [],
-            currentGenre: null,
-        };
-
-        this.getMovies();
-        this.getGenreList();
+    componentDidMount() {
     }
 
-    getMovies = () => {
-        axios
-            .get(endpoints.mostPopularMovies())
-            .then((res) => this.setMovieList(res.data.results))
-            .catch((error) => console.log(error));
-    };
-
-    setMovieList = (list) => {
-        const favoriteList = list.map((listItem) => {
-            return {...listItem, favorite: false}
-        });
-
-        this.setState({
-            movieList: favoriteList,
-        });
-    };
-
-    getGenreList = () => {
-        axios
-            .get(endpoints.genres())
-            .then((res) => this.setGenreList(res.data.genres))
-            .catch((error) => console.log(error));
-    };
-
-    setGenreList = (list) => {
-        this.setState({
-            genreList: list,
-        });
-    };
-
-    getCurrentGenre = (id) => {
-        this.setState({
-            currentGenre: id,
-        });
-    };
-
-    setDefaultGenreState = () => {
-        this.setState({
-            currentGenre: null,
-        });
-    };
-
-    setFavoriteMovie = (id) => {
-        const newList = this.state.movieList.map((listItem) => {
-            if (listItem.id === id) {
-                return {...listItem, favorite: !listItem.favorite}
-            } else {
-                return listItem
-            }
-        });
-
-        this.setState({movieList: newList})
-    };
-
     render() {
-        const {movieList, genreList, currentGenre} = this.state;
+        const {movieList, genreList, currentGenre} = this.props;
         const filteredMovies = currentGenre !== null ? movieList.filter(movie => {
             if (movie.genre_ids.includes(currentGenre)) {
                 return movie;
