@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { endpoints, getImageUrl } from '../../config';	import { endpoints, getImageUrl } from '../../config';
+import { endpoints, getImageUrl } from '../../config';
 import { setMovieList } from '../actions';
 import { getMovieList } from '../thunks';
 
