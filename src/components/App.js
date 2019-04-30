@@ -10,7 +10,7 @@ import { getMovieList } from '../thunks';
 
 class App extends React.Component {
     componentDidMount() {
-        
+
     }
 
     render() {

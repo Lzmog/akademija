@@ -5,9 +5,10 @@ import App from './components/App';
 import {applyMiddleware, createStore} from "redux";
 import {logger} from "redux-logger/src";
 import thunk from "redux-thunk";
+import baseReducer from "./reducers/baseReducer";
 
 const store = createStore(
-    reducer,
+    baseReducer,
     applyMiddleware(logger, thunk)
 );
 
