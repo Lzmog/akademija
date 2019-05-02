@@ -27,8 +27,8 @@ class App extends React.Component {
     };
 
     render() {
-        const {movieList, genreList, activeGenre, onSetActiveGenre, onSetHeart, heartMovies, onUnsetHeart} = this.props;
-        console.log(activeGenre);
+        const {movieList, genreList, activeGenre, onSetActiveGenre, onSetHeart, heartMovies, onUnsetHeart, logList} = this.props;
+        console.log(logList);
         const filteredMovies =
             activeGenre !== null ?
             movieList &&movieList.filter(movie => {
@@ -72,7 +72,7 @@ class App extends React.Component {
                     <span
                         key={i}
                         className='genre'
-                        onClick={() => onSetActiveGenre(listItem.id)}
+                        onClick={() => onSetActiveGenre(listItem.id, listItem.name)}
                     >
               {listItem.name}
             </span>
@@ -90,15 +90,16 @@ const mapStateToProps = (state) => ({
     genreList: state.genres.list,
     activeGenre: state.genres.activeGenre,
     movieList: state.movies.list,
-    heartMovies: state.movies.heartMovies
+    heartMovies: state.movies.heartMovies,
+    logList: state.logs.logs
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onGetGenreList: () => dispatch(getGenreList()),
     onGetMoviesList: () => dispatch(getMoviesList()),
-    onSetActiveGenre: (id) => dispatch(setActiveGenre(id)),
-    onSetHeart: (movieId) => dispatch(setHeart(movieId)),
-    onUnsetHeart: (movieId => dispatch(unsetHeart(movieId)))
+    onSetActiveGenre: (id, name) => dispatch(setActiveGenre(id, name)),
+    onSetHeart: (movieId, title) => dispatch(setHeart(movieId, title)),
+    onUnsetHeart: (movieId, title) => dispatch(unsetHeart(movieId, title))
 });
 
 export default connect(

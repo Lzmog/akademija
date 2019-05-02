@@ -8,22 +8,31 @@ export const setMoviesList = (list) => ({
     list
 });
 
-export const setLogList = (list) => ({
+export const setLogList = (log) => ({
     type: 'SET_LOG_LIST',
-    list
+    log
 });
 
-export const setHeart = (movieId) => ({
-    type: 'SET_HEART',
-    movieId
-});
+export const setHeart = (movieId,title) => (dispatch) => {
+    dispatch(setLogList(title));
+    dispatch({
+        type: 'SET_HEART',
+        movieId
+    });
+}
 
-export const unsetHeart = (movieId) => ({
-    type: 'UNSET_HEART',
-    movieId
-});
+export const unsetHeart = (movieId,title) => (dispatch) => {
+    dispatch(setLogList(title));
+    dispatch({
+        type: 'UNSET_HEART',
+        movieId
+    });
+}
 
-export const setActiveGenre = (activeGenre) => ({
-    type: 'SET_ACTIVE_GENRE',
-    activeGenre
-});
+export const setActiveGenre = (activeGenre, name) => (dispatch) => {
+    dispatch(setLogList(name));
+    dispatch({
+        type: 'SET_ACTIVE_GENRE',
+        activeGenre
+    });
+}
