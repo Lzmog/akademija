@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 import axios from 'axios';
 import {endpoints, getImageUrl} from '../../config';
-import {setActiveGenre} from '../action';
+import {setActiveGenre, setHeart, unsetHeart} from '../action';
 import {connect} from "react-redux";
 import {getMoviesList, getGenreList} from '../thunks';
 
@@ -27,7 +27,7 @@ class App extends React.Component {
     };
 
     render() {
-        const {movieList, genreList, activeGenre, onSetActiveGenre} = this.props;
+        const {movieList, genreList, activeGenre, onSetActiveGenre, onSetHeart, heartMovies, onUnsetHeart} = this.props;
         console.log(activeGenre);
         const filteredMovies =
             activeGenre !== null ?
@@ -46,6 +46,8 @@ class App extends React.Component {
                 description={listItem.overview}
                 setFavoriteMovie={this.setFavoriteMovie}
                 favorite={listItem.favorite}
+                heart={heartMovies.includes(listItem.id) ? onUnsetHeart : onSetHeart}
+                isHearted={heartMovies.includes(listItem.id)}
             />
         )) :
             movieList &&movieList.map((listItem) => (
@@ -59,6 +61,8 @@ class App extends React.Component {
                 description={listItem.overview}
                 setFavoriteMovie={this.setFavoriteMovie}
                 favorite={listItem.favorite}
+                heart={heartMovies.includes(listItem.id) ? onUnsetHeart : onSetHeart}
+                isHearted={heartMovies.includes(listItem.id)}
             />
         ));
 
@@ -86,12 +90,15 @@ const mapStateToProps = (state) => ({
     genreList: state.genres.list,
     activeGenre: state.genres.activeGenre,
     movieList: state.movies.list,
+    heartMovies: state.movies.heartMovies
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onGetGenreList: () => dispatch(getGenreList()),
     onGetMoviesList: () => dispatch(getMoviesList()),
-    onSetActiveGenre: (id) => dispatch(setActiveGenre(id))
+    onSetActiveGenre: (id) => dispatch(setActiveGenre(id)),
+    onSetHeart: (movieId) => dispatch(setHeart(movieId)),
+    onUnsetHeart: (movieId => dispatch(unsetHeart(movieId)))
 });
 
 export default connect(

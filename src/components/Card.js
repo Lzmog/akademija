@@ -19,7 +19,9 @@ class Card extends React.Component {
             votes,
             description,
             setFavoriteMovie,
-            favorite
+            favorite,
+            heart,
+            isHearted
         } = this.props;
         const {opened} = this.state;
 
@@ -36,8 +38,8 @@ class Card extends React.Component {
                     {title}
                 </div>
 
-                <div className="card__like" onClick={() => setFavoriteMovie(movieId)}>
-                    <i className={`fa ${favorite ? 'fa-heart' : 'fa-heart-o'}`}/>
+                <div className="card__like" onClick={() => heart(movieId)}>
+                    <i className={`fa ${isHearted ? 'fa-heart' : 'fa-heart-o'}`}/>
                 </div>
 
                 <div className="card__subtitle">

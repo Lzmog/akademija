@@ -13,9 +13,14 @@ export const setLogList = (list) => ({
     list
 });
 
-export const setHeartedList = (log) => ({
-    type: 'SET_HEARTED_LIST',
-    log
+export const setHeart = (movieId) => ({
+    type: 'SET_HEART',
+    movieId
+});
+
+export const unsetHeart = (movieId) => ({
+    type: 'UNSET_HEART',
+    movieId
 });
 
 export const setActiveGenre = (activeGenre) => ({
