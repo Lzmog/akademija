@@ -17,3 +17,8 @@ export const setHeartedList = (log) => ({
     type: 'SET_HEARTED_LIST',
     log
 });
+
+export const setActiveGenre = (activeGenre) => ({
+    type: 'SET_ACTIVE_GENRE',
+    activeGenre
+});

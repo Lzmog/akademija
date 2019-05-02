@@ -2,7 +2,7 @@ import React from 'react';
 import Card from './Card';
 import axios from 'axios';
 import {endpoints, getImageUrl} from '../../config';
-import {} from '../action';
+import {setActiveGenre} from '../action';
 import {connect} from "react-redux";
 import {getMoviesList, getGenreList} from '../thunks';
 
@@ -27,27 +27,27 @@ class App extends React.Component {
     };
 
     render() {
-        const {movieList, genreList, currentGenre = null} = this.props;
-        console.log(movieList, genreList);
+        const {movieList, genreList, activeGenre, onSetActiveGenre} = this.props;
+        console.log(activeGenre);
         const filteredMovies =
-            // currentGenre !== null ?
-        //     movieList.filter(movie => {
-        //     if (movie.genre_ids.includes(currentGenre)) {
-        //         return movie;
-        //     }
-        // }).map((listItem) => (
-        //     <Card
-        //         movieId={listItem.id}
-        //         backgroundImage={getImageUrl(listItem.backdrop_path)}
-        //         title={listItem.original_title}
-        //         releaseDate={listItem.release_date}
-        //         score={listItem.vote_average}
-        //         votes={listItem.vote_count}
-        //         description={listItem.overview}
-        //         setFavoriteMovie={this.setFavoriteMovie}
-        //         favorite={listItem.favorite}
-        //     />
-        // )) :
+            activeGenre !== null ?
+            movieList &&movieList.filter(movie => {
+            if (movie.genre_ids.includes(activeGenre)) {
+                return movie;
+            }
+        }).map((listItem) => (
+            <Card
+                movieId={listItem.id}
+                backgroundImage={getImageUrl(listItem.backdrop_path)}
+                title={listItem.original_title}
+                releaseDate={listItem.release_date}
+                score={listItem.vote_average}
+                votes={listItem.vote_count}
+                description={listItem.overview}
+                setFavoriteMovie={this.setFavoriteMovie}
+                favorite={listItem.favorite}
+            />
+        )) :
             movieList &&movieList.map((listItem) => (
             <Card
                 movieId={listItem.id}
@@ -68,12 +68,12 @@ class App extends React.Component {
                     <span
                         key={i}
                         className='genre'
-                        onClick={() => this.getCurrentGenre(listItem.id)}
+                        onClick={() => onSetActiveGenre(listItem.id)}
                     >
               {listItem.name}
             </span>
                 ))}
-                <span className='genre' onClick={() => this.setDefaultGenreState()}>
+                <span className='genre' onClick={() => onSetActiveGenre(null)}>
                     All genres
                 </span>
                 {filteredMovies}
@@ -84,12 +84,14 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => ({
     genreList: state.genres.list,
+    activeGenre: state.genres.activeGenre,
     movieList: state.movies.list,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     onGetGenreList: () => dispatch(getGenreList()),
     onGetMoviesList: () => dispatch(getMoviesList()),
+    onSetActiveGenre: (id) => dispatch(setActiveGenre(id))
 });
 
 export default connect(
